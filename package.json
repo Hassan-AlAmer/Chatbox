@@ -1,0 +1,26 @@
+{
+  "name": "chatting-with-socket.io",
+  "version": "1.0.0",
+  "description": "Create a chat application using socket.io and Node JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hassan-AlAmer/Project-chatting-with-socket.io.git"
+  },
+  "author": "Hassan AlAmer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hassan-AlAmer/Project-chatting-with-socket.io/issues"
+  },
+  "homepage": "https://github.com/Hassan-AlAmer/Project-chatting-with-socket.io#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^4.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
