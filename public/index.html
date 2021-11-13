@@ -16,7 +16,7 @@
             <div class="col-8 main-chat">
                 <div class="row bg-dark">
                     <div class="col">
-                        <p class="p-3 m-0 fs-3 fw-bold text-center text-info">Wellcom to Chatting with Socket IO</p>
+                        <p class="p-3 m-0 fs-3 fw-bold text-center text-info">Wellcome to Chatting with Socket IO</p>
                     </div>
                 </div>
                 <div class="row">
@@ -25,16 +25,18 @@
                         <div id="typing"></div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col p-0">
-                        <input type="text" class="form-control" id="message" placeholder="Please Write Message">
+                <form id="chatFrom">
+                    <div class="row">
+                        <div class="col p-0">
+                            <input type="text" class="form-control" id="message" placeholder="Please Write Message" autocomplete="off">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col p-0">
-                        <button id="send" class="btn btn-primary w-100 fw-bold p-2">Send</button>
+                    <div class="row">
+                        <div class="col p-0">
+                            <button class="btn btn-primary w-100 fw-bold p-2">Send</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

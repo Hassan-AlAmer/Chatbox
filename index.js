@@ -15,5 +15,21 @@ app.use(express.static('public'));
  
 io.on('connection', (socket) => {
     console.log("connect");
+
+    // Handle NickName event
+    socket.on('new user', (usr) => {
+        socket.NickName = usr;
+        console.log('NickName connected - NickName: ' + socket.NickName);
+    });
+
+    // Handle message event
+    socket.on('new message', (msg) => {
+        io.emit('send message', {message: msg, user: socket.NickName});
+    });
+
+    // Handle typing event
+    socket.on('typing', ()=>{
+        socket.broadcast.emit('typing', socket.NickName);
+    });
 });
 
