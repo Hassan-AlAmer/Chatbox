@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div id="chat-window" class="col">
+                    <div id="chat-window" class="col mt-3">
                         <div id="chat-message"></div>
                         <div id="typing"></div>
                     </div>
@@ -46,17 +46,19 @@
             <div class="modal-header">
               <h5 class="modal-title">Start Chat</h5>
             </div>
-            <div class="modal-body">
-              <div class="row">
-                  <div class="col">
-                    <label for="NickName" class="form-label fw-bold">Enter Your NickName:</label>
-                    <input type="text" class="form-control" id="NickName" placeholder="Please Enter Your NickName">
-                  </div>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" id="NickNameButton" class="btn btn-success">Enter</button>
-            </div>
+            <form id="NickNameForm">
+                <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <label for="NickName" class="form-label fw-bold">Enter Your NickName:</label>
+                        <input type="text" class="form-control" id="NickName" placeholder="Please Enter Your NickName" autocomplete="off">
+                    </div>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" class="btn btn-success">Enter</button>
+                </div>
+            </form>
             <div class="modal-body">
                 <p id="NickName-error" class="fw-bold text-danger"></p>
             </div>

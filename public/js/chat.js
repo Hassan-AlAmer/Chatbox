@@ -5,7 +5,7 @@ var NickNameModal = new bootstrap.Modal(document.getElementById('NickNameModal')
 NickNameModal.show();
 
 var NickName=document.getElementById("NickName");
-var NickNameButton=document.getElementById("NickNameButton");
+var NickNameForm=document.getElementById("NickNameForm");
 
 var message=document.getElementById("message");
 var typing=document.getElementById("typing");
@@ -14,7 +14,14 @@ var chatFrom=document.getElementById("chatFrom");
 var ownUser="";
 
 // Emit events
-NickNameButton.addEventListener('click',()=>{
+document.getElementById('NickNameModal').addEventListener('shown.bs.modal', function () {
+    NickName.focus();
+  })
+  document.getElementById('NickNameModal').addEventListener('hidden.bs.modal', function () {
+    message.focus();
+  })
+  NickNameForm.addEventListener('submit',(e)=>{
+      e.preventDefault();
     if(NickName.value.length == 0){
         document.getElementById("NickName-error").innerText="Please Enter Your NickName";
     }else{
@@ -39,11 +46,13 @@ message.addEventListener('keypress', function(){
 // Listen for events
 socket.on('send message', function(data){
     typing.innerHTML = '';
+    var userIsOwnMeClass="";
     if(ownUser==data.user){
-        chatMessage.innerHTML += '<p>1111<strong>' + data.user + ': </strong>' + data.message + '</p>';
+        userIsOwnMeClass="box-title-grean ms-2";
     }else{
-        chatMessage.innerHTML += '<p>2222<strong>' + data.user + ': </strong>' + data.message + '</p>';
+        userIsOwnMeClass="box-title-red offset-2";
     }
+    chatMessage.innerHTML += '<div class="row pe-2"><div class="col-10 bg-white p-3 rounded-3 shadow-sm mb-3 '+userIsOwnMeClass+'"><strong>' + data.user + ': </strong>' + data.message + '</div></div>';
     
     chatMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
 });
