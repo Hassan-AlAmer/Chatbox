@@ -44,6 +44,29 @@ message.addEventListener('keypress', function(){
 })
 
 // Listen for events
+socket.on('userList', function(users, id){
+    if(users.length){
+        console.log(users);
+    }
+});
+socket.on('output message', function(data){
+    if(data.length){
+        data.forEach(data => {
+            typing.innerHTML = '';
+            var userIsOwnMeClass="";
+            if(ownUser==data.user){
+                userIsOwnMeClass="box-title-grean ms-2";
+            }else{
+                userIsOwnMeClass="box-title-red offset-2";
+            }
+            chatMessage.innerHTML += '<div class="row pe-2"><div class="col-10 bg-white p-3 rounded-3 shadow-sm mb-3 '+userIsOwnMeClass+'"><strong>' + data.user + ': </strong>' + data.text + '</div></div>';
+            
+            chatMessage.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        });
+    }
+
+});
+
 socket.on('send message', function(data){
     typing.innerHTML = '';
     var userIsOwnMeClass="";
