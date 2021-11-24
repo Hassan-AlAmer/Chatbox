@@ -22,3 +22,6 @@
     border-left: 5px solid #e74c3c;
     color: #960000;
 }
+#userContainer .alert{
+    margin-bottom: 0;
+}

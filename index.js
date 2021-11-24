@@ -31,10 +31,7 @@ io.on('connection', (socket) => {
             NickName : usr
         });
 
-        let len = users.length;
-        len--;
-
-        io.emit('userList', users, users[len].id);
+        io.emit('userList', users);
 
         console.log('NickName connected - NickName: ' + socket.NickName);
         Message.find().then((result)=>{
@@ -56,6 +53,17 @@ io.on('connection', (socket) => {
     // Handle typing event
     socket.on('typing', ()=>{
         socket.broadcast.emit('typing', socket.NickName);
+    });
+
+    socket.on('disconnect',()=>{
+                
+        for(let i=0; i < users.length; i++){
+            
+            if(users[i].id === socket.id){
+                users.splice(i,1); 
+            }
+        }
+        io.emit('userList', users);
     });
 });
 
