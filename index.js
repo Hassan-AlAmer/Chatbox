@@ -38,6 +38,8 @@ io.on('connection', (socket) => {
         console.log('NickName connected - NickName: ' + socket.NickName);
         Message.find({},{_id:0}).then((result)=>{
             io.to(socket.id).emit('output message', result);
+        }).catch((e)=>{
+            console.log(e);
         })
     });
 
@@ -48,6 +50,8 @@ io.on('connection', (socket) => {
         message.user=socket.NickName;
         message.save().then(()=>{
             io.emit('send message', {message: msg, user: socket.NickName});
+        }).catch((e)=>{
+            console.log(e);
         })
         
     });
@@ -68,6 +72,8 @@ io.on('connection', (socket) => {
     socket.on('Get Chat',()=>{               
         Message.find({},{_id:0}).then((result)=>{
             io.to(socket.id).emit('Download Chat', result);
+        }).catch((e)=>{
+            console.log(e);
         })
     });
 });
