@@ -34,7 +34,7 @@ io.on('connection', (socket) => {
         io.emit('userList', users);
 
         console.log('NickName connected - NickName: ' + socket.NickName);
-        Message.find().then((result)=>{
+        Message.find({},{_id:0}).then((result)=>{
             io.to(socket.id).emit('output message', result);
         })
     });
@@ -55,15 +55,18 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('typing', socket.NickName);
     });
 
-    socket.on('disconnect',()=>{
-                
-        for(let i=0; i < users.length; i++){
-            
+    socket.on('disconnect',()=>{               
+        for(let i=0; i < users.length; i++){           
             if(users[i].id === socket.id){
                 users.splice(i,1); 
             }
         }
         io.emit('userList', users);
+    });
+    socket.on('Get Chat',()=>{               
+        Message.find({},{_id:0}).then((result)=>{
+            io.to(socket.id).emit('Download Chat', result);
+        })
     });
 });
 

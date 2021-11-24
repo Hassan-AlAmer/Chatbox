@@ -12,6 +12,7 @@ var typing=document.getElementById("typing");
 var chatMessage=document.getElementById("chat-message");
 var chatFrom=document.getElementById("chatFrom");
 var userContainer=document.getElementById("userContainer");
+var downloadChat=document.getElementById("downloadChat");
 var ownUser="";
 
 // Emit events
@@ -29,7 +30,8 @@ document.getElementById('NickNameModal').addEventListener('shown.bs.modal', func
         socket.emit('new user', NickName.value);
         ownUser=NickName.value;
         NickNameModal.hide();
-        
+        downloadChat.parentElement.parentElement.classList.remove("d-none")
+        downloadChat.parentElement.parentElement.classList.add("d-block")
     }
 })
 
@@ -43,6 +45,9 @@ chatFrom.addEventListener('submit',(e)=>{
 
 message.addEventListener('keypress', function(){    
     socket.emit('typing');
+})
+downloadChat.addEventListener('click',()=>{
+    socket.emit('Get Chat');
 })
 
 // Listen for events
@@ -102,3 +107,25 @@ socket.on('typing', function(user){
         typing.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
 });
+socket.on('Download Chat', function(data){    
+    if(data.length){
+        let body="";
+        data.forEach( data => {
+            body+=`${data.user}(${data.createdAt.substring(0, 10)}): ${data.text}\n`;
+        });
+        download(body)
+    }
+});
+
+function download(text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', "ChatMessage.txt");
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+}
