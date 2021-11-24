@@ -15,6 +15,8 @@ server.listen(config.port, ()=>{
 mongoose.Promise=global.Promise;
 mongoose.connect(config.mongoURI, {useNewUrlParser:true}).then(()=>{
     console.log("db connected");
+}).catch((e)=>{
+    console.log(e);
 })
 
 // Static files
